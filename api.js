@@ -117,6 +117,7 @@ function getUserIsolationPageData() {
     let { value } = energyReward // 可领取申购耐力值奖励
     let endTime = travelEndTime * 1000
     log('当前小茅运值:', xmy)
+    sendBarkMsg('当前小茅运值:' + xmy)
 
     if (value) {
       await getUserEnergyAward()
@@ -172,6 +173,7 @@ function getExchangeRateInfo() {
 function getUserEnergyAward() {
   console.log()
   log('获取申购耐力值: ')
+  sendBarkMsg('获取申购耐力值: ')
   return httpRequest(
     baseURL + 'isolationPage/getUserEnergyAward',
     'post',
@@ -179,8 +181,10 @@ function getUserEnergyAward() {
   ).then(d => {
     if (d.code === 200) {
       log('耐力值领取成功')
+      sendBarkMsg('耐力值领取成功')
     } else {
       log('耐力值领取失败', d.message || '')
+      sendBarkMsg('耐力值领取失败')
       return Promise.reject()
     }
   })
